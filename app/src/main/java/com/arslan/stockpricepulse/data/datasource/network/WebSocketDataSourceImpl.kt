@@ -23,6 +23,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 /**
@@ -112,7 +113,7 @@ class WebSocketDataSourceImpl(
 
         try {
             val message = PriceUpdateMessageDto.fromStockPriceDto(priceUpdate)
-            val jsonString = json.encodeToString(PriceUpdateMessageDto.serializer(), message)
+            val jsonString = json.encodeToString(message)
             webSocketSession?.send(Frame.Text(jsonString))
         } catch (e: Exception) {
             // Handle send error - could emit error status
