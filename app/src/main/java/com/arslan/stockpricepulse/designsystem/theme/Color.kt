@@ -1,56 +1,107 @@
 package com.arslan.stockpricepulse.designsystem.theme
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
 
-// Material Design 3 colors
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+/**
+ * Theme-aware color palette for Stock Price Pulse app.
+ * Provides light and dark theme variants for all UI elements.
+ */
+data class StockPriceColorPalette(
+    // Background Colors
+    val primaryBackground: Color,
+    val screenBackground: Color,
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+    // Price Movement Colors (same for both themes)
+    val green: Color,
+    val red: Color,
+    val gray: Color,
 
-// Stock Price Pulse specific colors - Fintech Dark Theme
-object StockPriceColors {
-    // Primary Background Colors
-    /** Very dark navy background for main card */
-    val primaryBackground = Color(0xFF0F1217)
-
-    // Price Movement Colors
-    /** Green color for price increase/up movement */
-    val green = Color(0xFF4CAF50)
-    
-    /** Red color for price decrease/down movement */
-    val red = Color(0xFFEF5350)
-    /** Gray color for unchanged/neutral price movement */
-    val gray = Color(0xFF9E9E9E)
-    
     // Text Colors
-    /** Primary text color - white */
-    val textPrimary = Color(0xFFFFFFFF)
-    
-    /** Secondary/muted text color */
-    val textSecondary = Color(0xFFB0B0B0)
+    val textPrimary: Color,
+    val textSecondary: Color,
+    val textTertiary: Color,
 
-    /** Connection status - Connected (green) */
-    val connected = Color(0xFF4CAF50)
-    
-    /** Connection status - Disconnected (red) */
-    val disconnected = Color(0xFFF44336)
-    
-    /** Connection status - Connecting (orange/amber) */
-    val connecting = Color(0xFFFF9800)
-    
-    // Status Colors
-    /** Error color */
-    val error = Color(0xFFD32F2F)
+    // Connection Status Colors (same for both themes)
+    val connected: Color,
+    val disconnected: Color,
+    val connecting: Color,
+    val error: Color,
 
-    // Divider Colors
-    /** Divider color between rows */
-    val divider = Color(0xFF3A3A3A)
-    
-    // Button Colors
-    /** Toggle button background (blue-ish) */
-    val toggleButtonBackground = Color(0xFF1976D2)
+    // UI Element Colors
+    val divider: Color,
+    val toggleButtonBackground: Color,
+)
+
+/**
+ * Dark theme color palette - Fintech Dark Theme
+ */
+internal val DarkStockPriceColors = StockPriceColorPalette(
+    // Backgrounds
+    primaryBackground = Color(0xFF0F1217), // Very dark navy
+    screenBackground = Color(0xFF0F1217), // Very dark navy
+
+    // Price Movement (same for both themes)
+    green = Color(0xFF4CAF50),
+    red = Color(0xFFEF5350),
+    gray = Color(0xFF9E9E9E),
+
+    // Text Colors
+    textPrimary = Color(0xFFFFFFFF), // White
+    textSecondary = Color(0xFFB0B0B0), // Light gray
+    textTertiary = Color(0xFF768089), // Muted gray
+
+    // Connection Status (same for both themes)
+    connected = Color(0xFF4CAF50),
+    disconnected = Color(0xFFF44336),
+    connecting = Color(0xFFFF9800),
+    error = Color(0xFFD32F2F),
+
+    // UI Elements
+    divider = Color(0xFF3A3A3A),
+    toggleButtonBackground = Color(0xFF1976D2),
+)
+
+/**
+ * Light theme color palette - Clean Light Theme
+ */
+internal val LightStockPriceColors = StockPriceColorPalette(
+    // Backgrounds
+    primaryBackground = Color(0xFFFFFFFF), // White
+    screenBackground = Color(0xFFFFFFFF), // White
+
+    // Price Movement (same for both themes)
+    green = Color(0xFF4CAF50),
+    red = Color(0xFFEF5350),
+    gray = Color(0xFF9E9E9E),
+
+    // Text Colors
+    textPrimary = Color(0xFF1C1C1E), // Dark gray/black
+    textSecondary = Color(0xFF6D6D70), // Medium gray
+    textTertiary = Color(0xFF8E8E93), // Light gray
+
+    // Connection Status (same for both themes)
+    connected = Color(0xFF4CAF50),
+    disconnected = Color(0xFFF44336),
+    connecting = Color(0xFFFF9800),
+    error = Color(0xFFD32F2F),
+
+    // UI Elements
+    divider = Color(0xFFE5E5E5), // Light gray divider
+    toggleButtonBackground = Color(0xFF1976D2),
+)
+
+/**
+ * Local composition for StockPriceColors to access theme-aware colors.
+ */
+val LocalStockPriceColors = compositionLocalOf { DarkStockPriceColors }
+
+/**
+ * Composable function to get the current theme-aware StockPriceColors.
+ * Use this within MaterialTheme to access theme-aware colors.
+ */
+@Composable
+fun stockPriceColors(): StockPriceColorPalette {
+    return LocalStockPriceColors.current
 }

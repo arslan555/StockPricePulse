@@ -3,10 +3,9 @@ package com.arslan.stockpricepulse.designsystem.components
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
-import com.arslan.stockpricepulse.designsystem.theme.StockPriceColors
+import com.arslan.stockpricepulse.designsystem.theme.stockPriceColors
 import com.arslan.stockpricepulse.domain.model.PriceMovement
 
 /**
@@ -21,10 +20,11 @@ fun PriceChangeIndicator(
     movement: PriceMovement,
     modifier: Modifier = Modifier
 ) {
+    val colors = stockPriceColors()
     val (icon, color) = when (movement) {
-        is PriceMovement.Up -> "▲" to StockPriceColors.green
-        is PriceMovement.Down -> "▼" to StockPriceColors.red
-        is PriceMovement.Unchanged -> "—" to StockPriceColors.gray
+        is PriceMovement.Up -> "▲" to colors.green
+        is PriceMovement.Down -> "▼" to colors.red
+        is PriceMovement.Unchanged -> "—" to colors.gray
     }
 
     Text(

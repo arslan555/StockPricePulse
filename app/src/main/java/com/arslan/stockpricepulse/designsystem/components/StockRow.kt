@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -22,12 +22,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.delay
 import com.arslan.stockpricepulse.designsystem.theme.Spacing
-import com.arslan.stockpricepulse.designsystem.theme.StockPriceColors
 import com.arslan.stockpricepulse.designsystem.theme.StockPriceTypography
+import com.arslan.stockpricepulse.designsystem.theme.stockPriceColors
 import com.arslan.stockpricepulse.domain.model.PriceMovement
 import com.arslan.stockpricepulse.presentation.screens.pricetracker.model.StockUiModel
+import kotlinx.coroutines.delay
 
 /**
  * Reusable component for displaying a stock row in the list - Fintech Dark Theme.
@@ -43,6 +43,7 @@ fun StockRow(
     stock: StockUiModel,
     index: Int = 0,
 ) {
+    val colors = stockPriceColors()
     // Flash animation state for price text only
     var shouldFlashPrice by remember { mutableStateOf(false) }
     var flashPriceColor by remember { mutableStateOf<Color?>(null) }
@@ -51,8 +52,8 @@ fun StockRow(
     LaunchedEffect(stock.priceValue) {
         // Only flash on Up or Down movement, not Unchanged
         flashPriceColor = when (stock.movement) {
-            is PriceMovement.Up -> StockPriceColors.green
-            is PriceMovement.Down -> StockPriceColors.red
+            is PriceMovement.Up -> colors.green
+            is PriceMovement.Down -> colors.red
             else -> null
         }
         shouldFlashPrice = flashPriceColor != null
@@ -66,7 +67,7 @@ fun StockRow(
         targetValue = if (shouldFlashPrice && flashPriceColor != null) {
             flashPriceColor!!
         } else {
-            StockPriceColors.textPrimary
+            colors.textPrimary
         },
         animationSpec = tween(durationMillis = 200),
         label = "priceFlashAnimation"
@@ -78,9 +79,9 @@ fun StockRow(
             flashPriceColor!!
         } else {
             when (stock.movement) {
-                is PriceMovement.Up -> StockPriceColors.green
-                is PriceMovement.Down -> StockPriceColors.red
-                else -> StockPriceColors.gray
+                is PriceMovement.Up -> colors.green
+                is PriceMovement.Down -> colors.red
+                else -> colors.gray
             }
         },
         animationSpec = tween(durationMillis = 200),
@@ -94,7 +95,7 @@ fun StockRow(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(StockPriceColors.primaryBackground,)
+                .background(colors.primaryBackground)
                 .padding(horizontal = Spacing.medium, vertical = Spacing.medium),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
@@ -115,14 +116,14 @@ fun StockRow(
                     Text(
                         text = stock.symbol,
                         style = StockPriceTypography.symbolText,
-                        color = StockPriceColors.textPrimary
+                        color = colors.textPrimary
                     )
                     
                     // Company name
                     Text(
                         text = stock.companyName,
                         style = StockPriceTypography.companyNameText,
-                        color = StockPriceColors.textSecondary
+                        color = colors.textSecondary
                     )
                 }
             }
@@ -149,11 +150,11 @@ fun StockRow(
         }
         
         // Divider at bottom
-        Box(
+        Spacer(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(1.dp)
-                .background(StockPriceColors.divider)
+                .background(colors.divider)
                 .align(Alignment.BottomCenter)
         )
     }

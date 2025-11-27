@@ -23,7 +23,8 @@ import com.arslan.stockpricepulse.R
 import com.arslan.stockpricepulse.designsystem.components.PriceTrackerTopBar
 import com.arslan.stockpricepulse.designsystem.components.StockRow
 import com.arslan.stockpricepulse.designsystem.theme.Spacing
-import com.arslan.stockpricepulse.designsystem.theme.StockPriceColors
+import com.arslan.stockpricepulse.designsystem.theme.StockPriceTypography
+import com.arslan.stockpricepulse.designsystem.theme.stockPriceColors
 import com.arslan.stockpricepulse.domain.model.ConnectionStatus
 import com.arslan.stockpricepulse.presentation.screens.pricetracker.model.StockUiModel
 
@@ -61,10 +62,12 @@ fun PriceTrackerScreen(
         }
     }
 
+    val colors = stockPriceColors()
+    
     Scaffold(
         modifier = modifier.fillMaxSize(),
         snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
-        containerColor = StockPriceColors.primaryBackground,
+        containerColor = colors.screenBackground,
         topBar = {
             PriceTrackerTopBar(
                 connectionStatus = uiState.connectionStatus,
@@ -82,7 +85,7 @@ fun PriceTrackerScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(StockPriceColors.primaryBackground)
+                .background(colors.screenBackground)
                 .padding(paddingValues)
         ) {
             when {
@@ -175,9 +178,11 @@ private fun EmptyStateMessage(
             is ConnectionStatus.Connected -> stringResource(R.string.waiting_for_price_updates)
         }
 
+        val colors = stockPriceColors()
         androidx.compose.material3.Text(
             text = message,
-            style = com.arslan.stockpricepulse.designsystem.theme.StockPriceTypography.statusText,
+            style = StockPriceTypography.statusText,
+            color = colors.textSecondary,
             modifier = Modifier.padding(Spacing.medium)
         )
     }

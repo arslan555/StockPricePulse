@@ -7,17 +7,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.arslan.stockpricepulse.designsystem.theme.Spacing
-import com.arslan.stockpricepulse.designsystem.theme.StockPriceColors
 import com.arslan.stockpricepulse.designsystem.theme.StockPriceTypography
+import com.arslan.stockpricepulse.designsystem.theme.stockPriceColors
 import com.arslan.stockpricepulse.domain.model.ConnectionStatus
 
 /**
@@ -41,10 +41,13 @@ fun PriceTrackerTopBar(
     onStopClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val colors = stockPriceColors()
+    
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(StockPriceColors.primaryBackground)
+            .statusBarsPadding() // Add padding for status bar
+            .background(colors.primaryBackground)
             .padding(horizontal = Spacing.medium, vertical = Spacing.medium)
     ) {
         Row(
@@ -64,7 +67,7 @@ fun PriceTrackerTopBar(
                 Text(
                     text = "Stock Price Pulse",
                     style = StockPriceTypography.headerTitleText,
-                    color = StockPriceColors.textPrimary
+                    color = colors.textPrimary
                 )
             }
 
@@ -73,7 +76,8 @@ fun PriceTrackerTopBar(
                 isActive = isStopButtonEnabled,
                 onStartClick = onStartClick,
                 onStopClick = onStopClick,
-                enabled = isStartButtonEnabled || isStopButtonEnabled
+                enabled = isStartButtonEnabled || isStopButtonEnabled,
+                colors = colors
             )
         }
     }
@@ -87,11 +91,12 @@ private fun ConnectionStatusDot(
     status: ConnectionStatus,
     modifier: Modifier = Modifier
 ) {
+    val colors = stockPriceColors()
     val dotColor = when (status) {
-        is ConnectionStatus.Connected -> StockPriceColors.connected
-        is ConnectionStatus.Disconnected -> StockPriceColors.disconnected
-        is ConnectionStatus.Connecting -> StockPriceColors.connecting
-        is ConnectionStatus.Error -> StockPriceColors.error
+        is ConnectionStatus.Connected -> colors.connected
+        is ConnectionStatus.Disconnected -> colors.disconnected
+        is ConnectionStatus.Connecting -> colors.connecting
+        is ConnectionStatus.Error -> colors.error
     }
 
     Box(
@@ -110,6 +115,7 @@ private fun ToggleButton(
     onStartClick: () -> Unit,
     onStopClick: () -> Unit,
     enabled: Boolean,
+    colors: com.arslan.stockpricepulse.designsystem.theme.StockPriceColorPalette,
     modifier: Modifier = Modifier
 ) {
     IconButton(
@@ -118,14 +124,14 @@ private fun ToggleButton(
         modifier = modifier
             .size(40.dp)
             .background(
-                StockPriceColors.toggleButtonBackground,
+                colors.toggleButtonBackground,
                 shape = RoundedCornerShape(8.dp)
             )
     ) {
         // Using a simple icon - you can replace with play/pause icons
         Text(
             text = if (isActive) "⏸" else "▶",
-            color = StockPriceColors.textPrimary,
+            color = colors.textPrimary,
             style = StockPriceTypography.buttonText
         )
     }
