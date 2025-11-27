@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">StockPricePulse</string>
     <string name="press_start_to_begin_receiving_price_updates">Press Start to begin receiving price updates</string>
