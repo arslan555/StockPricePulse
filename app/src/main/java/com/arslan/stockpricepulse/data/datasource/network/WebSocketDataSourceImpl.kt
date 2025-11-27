@@ -5,6 +5,7 @@ import com.arslan.stockpricepulse.data.model.PriceUpdateMessageDto
 import com.arslan.stockpricepulse.data.model.StockPriceDto
 import com.arslan.stockpricepulse.domain.model.ConnectionStatus
 import io.ktor.client.HttpClient
+import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.websocket.WebSockets
 import io.ktor.client.plugins.websocket.webSocketSession
 import io.ktor.client.request.url
@@ -12,6 +13,7 @@ import io.ktor.websocket.Frame
 import io.ktor.websocket.WebSocketSession
 import io.ktor.websocket.close
 import io.ktor.websocket.readText
+import io.ktor.websocket.send
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -46,7 +48,7 @@ class WebSocketDataSourceImpl(
         private const val UPDATE_INTERVAL_MS = 2000L
     }
 
-    private val client = HttpClient {
+    private val client = HttpClient(OkHttp) {
         install(WebSockets)
     }
 
