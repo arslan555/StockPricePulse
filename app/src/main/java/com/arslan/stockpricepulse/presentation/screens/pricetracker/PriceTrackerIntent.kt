@@ -1,4 +1,4 @@
-package com.arslan.stockpricepulse.ui.screens.pricetracker
+package com.arslan.stockpricepulse.presentation.screens.pricetracker
 
 /**
  * Represents user intents/actions in the MVI pattern.

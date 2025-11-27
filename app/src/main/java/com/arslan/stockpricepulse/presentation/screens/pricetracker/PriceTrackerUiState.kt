@@ -1,7 +1,7 @@
-package com.arslan.stockpricepulse.ui.screens.pricetracker
+package com.arslan.stockpricepulse.presentation.screens.pricetracker
 
 import com.arslan.stockpricepulse.domain.model.ConnectionStatus
-import com.arslan.stockpricepulse.ui.screens.pricetracker.model.StockUiModel
+import com.arslan.stockpricepulse.presentation.screens.pricetracker.model.StockUiModel
 
 /**
  * Represents the UI state in the MVI pattern.

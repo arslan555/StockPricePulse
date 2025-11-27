@@ -1,4 +1,4 @@
-package com.arslan.stockpricepulse.ui.screens.pricetracker.model
+package com.arslan.stockpricepulse.presentation.screens.pricetracker.model
 
 import com.arslan.stockpricepulse.domain.model.PriceMovement
 

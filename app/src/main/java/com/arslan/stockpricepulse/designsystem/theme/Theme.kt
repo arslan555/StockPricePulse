@@ -1,6 +1,5 @@
-package com.arslan.stockpricepulse.ui.theme
+package com.arslan.stockpricepulse.designsystem.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

@@ -1,7 +1,7 @@
 package com.arslan.stockpricepulse.data.mapper
 
 import com.arslan.stockpricepulse.domain.model.Stock
-import com.arslan.stockpricepulse.ui.screens.pricetracker.model.StockUiModel
+import com.arslan.stockpricepulse.presentation.screens.pricetracker.model.StockUiModel
 
 /**
  * Mapper that converts domain models to UI models.
