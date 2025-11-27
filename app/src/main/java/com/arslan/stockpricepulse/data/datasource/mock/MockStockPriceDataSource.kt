@@ -59,6 +59,44 @@ class MockStockPriceDataSource {
             "DOCU" to 54.32,
             "RBLX" to 42.10
         )
+
+        /**
+         * Mapping of stock symbols to their company names.
+         */
+        val COMPANY_NAMES = mapOf(
+            "AAPL" to "Apple Inc.",
+            "GOOG" to "Alphabet Inc.",
+            "MSFT" to "Microsoft Corp.",
+            "AMZN" to "Amazon.com, Inc.",
+            "TSLA" to "Tesla, Inc.",
+            "NVDA" to "NVIDIA Corp.",
+            "META" to "Meta Platforms",
+            "NFLX" to "Netflix, Inc.",
+            "AMD" to "Advanced Micro Devices",
+            "INTC" to "Intel Corp.",
+            "ORCL" to "Oracle Corp.",
+            "CRM" to "Salesforce Inc.",
+            "ADBE" to "Adobe Inc.",
+            "PYPL" to "PayPal Holdings",
+            "UBER" to "Uber Technologies",
+            "LYFT" to "Lyft, Inc.",
+            "SPOT" to "Spotify Technology",
+            "TWTR" to "Twitter, Inc.",
+            "SNAP" to "Snap Inc.",
+            "PINS" to "Pinterest, Inc.",
+            "SQ" to "Block, Inc.",
+            "SHOP" to "Shopify Inc.",
+            "ZM" to "Zoom Video Communications",
+            "DOCU" to "DocuSign, Inc.",
+            "RBLX" to "Roblox Corp."
+        )
+
+        /**
+         * Gets the company name for a given symbol.
+         */
+        fun getCompanyName(symbol: String): String {
+            return COMPANY_NAMES[symbol] ?: symbol
+        }
     }
 
     /**

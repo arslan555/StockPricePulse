@@ -1,11 +1,12 @@
 package com.arslan.stockpricepulse.presentation.screens.pricetracker
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -22,6 +23,7 @@ import com.arslan.stockpricepulse.R
 import com.arslan.stockpricepulse.designsystem.components.PriceTrackerTopBar
 import com.arslan.stockpricepulse.designsystem.components.StockRow
 import com.arslan.stockpricepulse.designsystem.theme.Spacing
+import com.arslan.stockpricepulse.designsystem.theme.StockPriceColors
 import com.arslan.stockpricepulse.domain.model.ConnectionStatus
 import com.arslan.stockpricepulse.presentation.screens.pricetracker.model.StockUiModel
 
@@ -62,6 +64,7 @@ fun PriceTrackerScreen(
     Scaffold(
         modifier = modifier.fillMaxSize(),
         snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
+        containerColor = StockPriceColors.primaryBackground,
         topBar = {
             PriceTrackerTopBar(
                 connectionStatus = uiState.connectionStatus,
@@ -79,6 +82,7 @@ fun PriceTrackerScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .background(StockPriceColors.primaryBackground)
                 .padding(paddingValues)
         ) {
             when {
@@ -135,14 +139,16 @@ private fun StockList(
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
-        modifier = modifier,
-        contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = Spacing.small)
+        modifier = modifier
     ) {
-        items(
+        itemsIndexed(
             items = stocks,
-            key = { it.symbol }
-        ) { stock ->
-            StockRow(stock = stock)
+            key = { _, stock -> stock.symbol }
+        ) { index, stock ->
+            StockRow(
+                stock = stock,
+                index = index
+            )
         }
     }
 }
