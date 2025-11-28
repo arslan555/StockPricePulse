@@ -32,6 +32,7 @@ data class StockPriceColorPalette(
     // UI Element Colors
     val divider: Color,
     val toggleButtonBackground: Color,
+    val toggleButtonForeground: Color,
 )
 
 /**
@@ -60,7 +61,8 @@ internal val DarkStockPriceColors = StockPriceColorPalette(
 
     // UI Elements
     divider = Color(0xFF3A3A3A),
-    toggleButtonBackground = Color(0xFF1976D2),
+    toggleButtonBackground = Color(0xFF42A5F5),
+    toggleButtonForeground = Color(0xFF1A237E),
 )
 
 /**
@@ -89,7 +91,8 @@ internal val LightStockPriceColors = StockPriceColorPalette(
 
     // UI Elements
     divider = Color(0xFFE5E5E5), // Light gray divider
-    toggleButtonBackground = Color(0xFF1976D2),
+    toggleButtonBackground = Color(0xFF42A5F5),
+    toggleButtonForeground = Color(0xFF1A237E),
 )
 
 /**

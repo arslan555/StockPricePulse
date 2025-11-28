@@ -38,6 +38,8 @@ import com.arslan.stockpricepulse.presentation.screens.pricetracker.model.StockU
 @Composable
 fun PriceTrackerScreen(
     viewModel: PriceTrackerViewModel,
+    isDarkTheme: Boolean,
+    onThemeToggle: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -73,12 +75,14 @@ fun PriceTrackerScreen(
                 connectionStatus = uiState.connectionStatus,
                 isStartButtonEnabled = uiState.isStartButtonEnabled,
                 isStopButtonEnabled = uiState.isStopButtonEnabled,
+                isDarkTheme = isDarkTheme,
                 onStartClick = {
                     viewModel.handleIntent(PriceTrackerIntent.StartPriceFeed)
                 },
                 onStopClick = {
                     viewModel.handleIntent(PriceTrackerIntent.StopPriceFeed)
-                }
+                },
+                onThemeToggle = onThemeToggle
             )
         }
     ) { paddingValues ->
@@ -97,7 +101,6 @@ fun PriceTrackerScreen(
                 }
 
                 uiState.stocks.isEmpty() -> {
-                    // Show empty state message
                     EmptyStateMessage(
                         modifier = Modifier.align(Alignment.Center),
                         connectionStatus = uiState.connectionStatus
@@ -105,24 +108,9 @@ fun PriceTrackerScreen(
                 }
 
                 else -> {
-                    // Show list of stocks
                     StockList(
                         stocks = uiState.stocks,
                         modifier = Modifier.fillMaxSize()
-                    )
-                }
-            }
-
-            // Show loading overlay if loading while stocks are displayed
-            if (uiState.isLoading && uiState.stocks.isNotEmpty()) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(Spacing.large),
-                    contentAlignment = Alignment.TopEnd
-                ) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.padding(Spacing.small)
                     )
                 }
             }

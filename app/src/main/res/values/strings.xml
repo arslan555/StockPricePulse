@@ -4,4 +4,5 @@
     <string name="connecting_to_price_feed">Connecting to price feed…</string>
     <string name="connection_error_please_try_again">Connection error. Please try again.</string>
     <string name="waiting_for_price_updates">Waiting for price updates…</string>
+    <string name="stock_price_pulse">Stock Price Pulse</string>
 </resources>
