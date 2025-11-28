@@ -195,9 +195,7 @@ The app implements Model-View-Intent (MVI) architecture:
 - Updates UI with smooth animations to highlight price changes
 
 ## 👤 Author
-
-**Mirza Arslan**  
-GitHub: [@yourusername](https://github.com/yourusername)
+**Mirza Arslan**
 
 ---
 
